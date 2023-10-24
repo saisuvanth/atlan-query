@@ -36,7 +36,7 @@ const CustomEditor: FC<EditorProps> = ({ updateQueryData, defaultQuery }) => {
             </div>
             <Editor
                 height={200}
-                theme="vs-dark"
+                theme="light"
                 className="rounded-md shadow-md"
                 defaultValue={query}
                 language="sql"
@@ -48,7 +48,7 @@ const CustomEditor: FC<EditorProps> = ({ updateQueryData, defaultQuery }) => {
             />
             <div className="flex justify-end">
                 <button
-                    className="button gap-2 font-semibold text-lg bg-green-600 hover:bg-opacity-90"
+                    className="button text-white gap-2 font-semibold text-lg bg-green-600 hover:bg-opacity-90"
                     onClick={handleQuery}
                 >
                     Run

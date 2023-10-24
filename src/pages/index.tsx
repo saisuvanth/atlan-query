@@ -1,6 +1,7 @@
 import Editor from '@/components/editor'
 import Navbar from '@/components/navbar'
 import Results from '@/components/result'
+import MainWrapper from '@/layout/main-wrapper';
 import { getQueryData } from '@/util/query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -30,16 +31,9 @@ export default function Home() {
   }, [router.query])
 
   return (
-    <main className='h-screen max-h-screen flex gap-3'>
-      <Head>
-        <title>SQL Query Editor</title>
-        <meta name="description" content="SQL Query Editor" />
-      </Head>
-      <Navbar active='' />
-      <div className='flex flex-col w-5/6 py-2 gap-3'>
-        <Editor defaultQuery={initialQuery} updateQueryData={updateQueryData} />
-        <Results data={queryData} />
-      </div>
-    </main>
+    <MainWrapper title='SQL Query Editor' content='SQL Query Editor' active=''>
+      <Editor defaultQuery={initialQuery} updateQueryData={updateQueryData} />
+      <Results data={queryData} />
+    </MainWrapper>
   )
 }

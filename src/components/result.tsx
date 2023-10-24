@@ -35,7 +35,7 @@ const Results: FC<ResultsProps> = ({ data }) => {
                 }
             </div>
             <div className="flex justify-end items-center">
-                <button className="button gap-2 font-bold text-lg bg-blue-500 hover:bg-opacity-90">
+                <button className="button text-white gap-2 font-bold text-lg bg-blue-500 hover:bg-opacity-90">
                     <i className="fa-solid fa-download"></i>
                     Export Data
                 </button>
