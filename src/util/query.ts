@@ -9,7 +9,11 @@ import employees from '@/data/employees.json'
 import customers from '@/data/customers.json'
 
 type Table = {
-    [key: string]: object[]
+    [key: string]: { [key: string]: any }[];
+}
+
+export type TableMetadata = {
+    [key: string]: { name: string, type: any }[];
 }
 
 const tables: Table = {
@@ -30,4 +34,14 @@ export const getQueryData = (query: string) => {
         }
     }
     return [];
+}
+
+export const getTableMetadata = () => {
+    const tableMetadata: TableMetadata = {};
+    Object.keys(tables).forEach((table) => {
+        const tableDataObj = tables[table][0];
+        const keys = Object.keys(tableDataObj);
+        tableMetadata[table] = keys.map((k) => ({ name: k, type: typeof tableDataObj[k] }))
+    })
+    return tableMetadata;
 }

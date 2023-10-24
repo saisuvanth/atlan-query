@@ -9,7 +9,7 @@ const Navbar: FC<NavbarProps> = ({ active }) => {
     const routes = [{ name: 'Query Editor', path: '' }, { name: 'Tables', path: 'tables' }, { name: 'History', path: 'history' }]
 
     return (
-        <div className="flex flex-col py-2 px-3 w-1/6 shadow-md">
+        <div className="flex flex-col py-2 px-3 w-1/6 min-w-[200px] shadow-md">
             <div className="flex flex-row justify-center items-center gap-2 p-1">
                 <i className="fa-solid fa-database fa-2xl text-blue-600"></i>
                 <div className="text-3xl font-bold flex items-end gap-2">
