@@ -16,7 +16,7 @@ Crafted by Sai Suvanth
 
 ## View Demo on the Deployed Site 🚀
 
-<p>Click to [here](https://main--singular-froyo-32f018.netlify.app/)  view the deployed site </p>
+<p>Click to https://sql-atlan-query.netlify.app/  view the deployed site </p>
 
 <img alt="desktop image" src="./images/desktop.png">
 <div align="center"><img alt="mobile image" src="./images/mobile.png"></div>
