@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { FC, createRef, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-// import {} from '@monaco-editor/react';
+import { useTheme } from "next-themes";
 const Editor = dynamic(() => import('@monaco-editor/react'), { ssr: false });
 
 interface EditorProps {
@@ -9,11 +9,32 @@ interface EditorProps {
 }
 
 const CustomEditor: FC<EditorProps> = ({ updateQueryData, defaultQuery }) => {
+    const { theme } = useTheme();
+
+    const customTheme = theme === 'dark' ? 'vs-dark' : 'light';
+
     const [query, setQuery] = useState<string>(defaultQuery);
+    const containerRef = createRef<HTMLDivElement>();
+    const editorRef = useRef();
+    const monacoRef = useRef();
 
     useEffect(() => {
         setQuery(defaultQuery);
     }, [defaultQuery])
+
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const observer = new ResizeObserver(() => {
+            if (editorRef.current) {
+                (editorRef.current as any).layout();
+            }
+        });
+        observer.observe(containerRef.current!);
+        return () => {
+            observer.disconnect();
+        }
+    }, []);
 
     const handleQuery = () => {
         if (localStorage.getItem('queries')) {
@@ -28,32 +49,32 @@ const CustomEditor: FC<EditorProps> = ({ updateQueryData, defaultQuery }) => {
     }
 
     return (
-        <div className="px-4 flex flex-col gap-3">
-            <div className="flex justify-between items-center">
-                <div className="font-bold text-2xl">
-                    Query Editor
-                </div>
-            </div>
-            <Editor
-                height={200}
-                theme="light"
-                className="rounded-md shadow-md"
-                defaultValue={query}
-                language="sql"
-                onChange={(value) => setQuery(value!)}
-                options={{
-                    minimap: { enabled: false },
-                    automaticLayout: true
-                }}
-            />
-            <div className="flex justify-end">
+        <div className="rounded-md relative overflow-clip flex h-full flex-col bg-white gap-3" ref={containerRef}>
+            <div className="z-40 absolute bottom-2 right-2 flex justify-end">
                 <button
-                    className="button text-white gap-2 font-semibold text-lg bg-green-600 hover:bg-opacity-90"
+                    id="run-query" aria-label="Run Query"
+                    className="button !rounded-md text-white gap-2 font-semibold text-lg bg-green-700 hover:bg-opacity-90"
                     onClick={handleQuery}
                 >
                     Run
                 </button>
             </div>
+            <Editor
+                height="100%"
+                theme={customTheme}
+                className="rounded-md"
+                defaultValue={query}
+                language="sql"
+                onChange={(value) => setQuery(value!)}
+                onMount={(editor, monaco) => {
+                    editorRef.current = editor;
+                    monacoRef.current = monaco;
+                }}
+                options={{
+                    minimap: { enabled: false },
+                    automaticLayout: true
+                }}
+            />
         </div>
     )
 }

@@ -1,9 +1,11 @@
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify";
 
 
 const useLocalStorage = (key: string, initialValue: any) => {
     const [localStorageValue, setLocalStorageValue] = useState<string[]>();
+    const { theme } = useTheme();
 
     useEffect(() => {
         try {
@@ -14,12 +16,12 @@ const useLocalStorage = (key: string, initialValue: any) => {
                 return
             }
             setLocalStorageValue(JSON.parse(item))
-            toast.success(`Loaded ${key} from local storage`)
+            toast.success(`Loaded ${key} from local storage`, { theme: theme === "dark" ? "dark" : "light" })
         } catch (error) {
-            toast.error(`Failed to load ${key} from local storage`)
+            toast.error(`Failed to load ${key} from local storage`, { theme: theme === "dark" ? "dark" : "light" })
             setLocalStorageValue(initialValue)
         }
-    }, []);
+    }, [initialValue, key]);
 
     const setValue = (value: any) => {
         try {
