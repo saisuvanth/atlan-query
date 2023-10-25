@@ -16,8 +16,10 @@ Crafted by Sai Suvanth
 
 ## View Demo on the Deployed Site 🚀
 
-<p>Click to view the deployed site</p>
-<img src="">
+<p>Click to [here](https://main--singular-froyo-32f018.netlify.app/)  view the deployed site </p>
+
+<img alt="desktop image" src="./images/desktop.png">
+<div align="center"><img alt="mobile image" src="./images/mobile.png"></div>
 
 ## 👨‍💻 Features
 
@@ -47,7 +49,7 @@ Crafted by Sai Suvanth
 
 The Webapp loads in about 0.4 s to 0.6s, calculated using Lighthouse tool in Chromium based browsers. 
 
-<img width="" alt="" src="">
+<img alt="performance image" src="./images/performance.png">
 
 ## 🪜 Steps I took to optimize the page load time
 
