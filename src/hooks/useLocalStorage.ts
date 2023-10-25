@@ -21,7 +21,7 @@ const useLocalStorage = (key: string, initialValue: any) => {
             toast.error(`Failed to load ${key} from local storage`, { theme: theme === "dark" ? "dark" : "light" })
             setLocalStorageValue(initialValue)
         }
-    }, [initialValue, key]);
+    }, []);
 
     const setValue = (value: any) => {
         try {
